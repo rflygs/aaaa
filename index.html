@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swarous - Round Neck Long Sleeve Printed Flowy Dress</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #e74c3c;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-box {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            width: 200px;
+            font-size: 14px;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #e74c3c;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        /* Product Images */
+        .product-images {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .main-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .main-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 5px 0;
+        }
+
+        .thumbnail {
+            min-width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .thumbnail.active {
+            border-color: #e74c3c;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Product Details */
+        .product-details {
+            padding: 20px 0;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #ffa500;
+            font-size: 18px;
+        }
+
+        .review-count {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .price-container {
+            margin-bottom: 25px;
+        }
+
+        .current-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+
+        .original-price {
+            font-size: 20px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 15px;
+        }
+
+        .discount-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 15px;
+        }
+
+        /* Payment Options */
+        .payment-options {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .klarna-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .klarna-logo {
+            height: 20px;
+        }
+
+        .discount-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .discount-table th,
+        .discount-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .discount-table th {
+            background: #f1f2f6;
+            font-weight: 600;
+        }
+
+        /* Product Options */
+        .option-group {
+            margin-bottom: 25px;
+        }
+
+        .option-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 12px 18px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .size-option:hover {
+            border-color: #e74c3c;
+        }
+
+        .size-option.selected {
+            border-color: #e74c3c;
+            background: #e74c3c;
+            color: white;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .color-option.gray {
+            background: #8e8e93;
+        }
+
+        .color-option.selected {
+            border-color: #e74c3c;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            padding: 12px 15px;
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #f1f2f6;
+        }
+
+        .quantity-input {
+            border: none;
+            padding: 12px 15px;
+            text-align: center;
+            width: 60px;
+            font-weight: 600;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .add-to-cart {
+            padding: 18px 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #c0392b;
+        }
+
+        .buy-now {
+            padding: 18px 30px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .buy-now:hover {
+            background: #1a252f;
+        }
+
+        /* Features Section */
+        .features-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .feature-item {
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Specs Section */
+        .specs-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f2f6;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .spec-value {
+            color: #666;
+        }
+
+        /* Notes Section */
+        .notes-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff9e6;
+            border-radius: 12px;
+            border-left: 4px solid #ffa500;
+        }
+
+        .notes-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .notes-list {
+            list-style: disc;
+            margin-left: 20px;
+            color: #666;
+        }
+
+        .notes-list li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-actions {
+                gap: 10px;
+            }
+
+            .search-box {
+                width: 150px;
+            }
+
+            .product-title {
+                font-size: 24px;
+            }
+
+            .current-price {
+                font-size: 28px;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                position: sticky;
+                bottom: 20px;
+                background: white;
+                padding: 20px;
+                border-radius: 12px;
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">SWAROUS</a>
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Dresses</a></li>
+                <li><a href="#">Tops</a></li>
+                <li><a href="#">Bottoms</a></li>
+                <li><a href="#">Sale</a></li>
+            </ul>
+            <div class="nav-actions">
+                <input type="text" class="search-box" placeholder="Search products...">
+                <div class="cart-icon">
+                    🛒
+                    <span class="cart-badge">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="#">Home</a> / <a href="#">Dresses</a> / Round Neck Long Sleeve Printed Flowy Dress
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Product Images -->
+        <div class="product-images">
+            <div class="main-image">
+                <img src="http://swarous.com/cdn/shop/files/spp_20250304121537_596b6c61eef70fb25ab41afa37a4456f_6c76091a-35b9-4f6e-99ba-f388c718273d_small.png?v=1741242962" alt="Round Neck Long Sleeve Printed Flowy Dress" id="mainImage">
+            </div>
+            <div class="thumbnail-container">
+                <div class="thumbnail active" onclick="changeImage(this, 'http://swarous.com/cdn/shop/files/spp_20250304121537_596b6c61eef70fb25ab41afa37a4456f_6c76091a-35b9-4f6e-99ba-f388c718273d_small.png?v=1741242962')">
+                    <img src="http://swarous.com/cdn/shop/files/spp_20250304121537_596b6c61eef70fb25ab41afa37a4456f_6c76091a-35b9-4f6e-99ba-f388c718273d_small.png?v=1741242962" alt="Dress View 1">
+                </div>
+                <div class="thumbnail" onclick="changeImage(this, 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400')">
+                    <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400" alt="Dress View 2">
+                </div>
+                <div class="thumbnail" onclick="changeImage(this, 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400')">
+                    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400" alt="Dress View 3">
+                </div>
+                <div class="thumbnail" onclick="changeImage(this, 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400')">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400" alt="Dress View 4">
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="product-details">
+            <h1 class="product-title">Round Neck Long Sleeve Printed Flowy Dress</h1>
+            
+            <div class="product-rating">
+                <div class="stars">★★★★☆</div>
+                <span class="review-count">(124 reviews)</span>
+            </div>
+
+            <div class="price-container">
+                <span class="current-price">$49.99</span>
+                <span class="original-price">$89.99</span>
+                <span class="discount-badge">44% OFF</span>
+            </div>
+
+            <!-- Payment Options -->
+            <div class="payment-options">
+                <div class="klarna-info">
+                    <img src="http://swarous.com/cdn/shop/files/klarna.png?v=1699965039" alt="Klarna" class="klarna-logo">
+                    <span>Pay in 4 interest-free installments</span>
+                </div>
+                <table class="discount-table">
+                    <thead>
+                        <tr>
+                            <th>Minimum Qty</th>
+                            <th>Discount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2 items</td>
+                            <td>5% OFF</td>
+                        </tr>
+                        <tr>
+                            <td>3 items</td>
+                            <td>10% OFF</td>
+                        </tr>
+                        <tr>
+                            <td>5 items</td>
+                            <td>15% OFF</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Size Selection -->
+            <div class="option-group">
+                <div class="option-label">Size</div>
+                <div class="size-options">
+                    <div class="size-option" onclick="selectSize(this)">S</div>
+                    <div class="size-option" onclick="selectSize(this)">M</div>
+                    <div class="size-option selected" onclick="selectSize(this)">L</div>
+                    <div class="size-option" onclick="selectSize(this)">XL</div>
+                    <div class="size-option" onclick="selectSize(this)">2XL</div>
+                    <div class="size-option" onclick="selectSize(this)">3XL</div>
+                    <div class="size-option" onclick="selectSize(this)">4XL</div>
+                </div>
+                <a href="#" style="color: #e74c3c; font-size: 14px; text-decoration: none;">SIZE GUIDE</a>
+            </div>
+
+            <!-- Color Selection -->
+            <div class="option-group">
+                <div class="option-label">Color</div>
+                <div class="color-options">
+                    <div class="color-option gray selected" onclick="selectColor(this)"></div>
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="quantity-container">
+                <div class="option-label">Quantity</div>
+                <div class="quantity-selector">
+                    <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                    <input type="number" class="quantity-input" value="1" min="1" id="quantity">
+                    <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                <button class="buy-now" onclick="buyNow()">Buy Now</button>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features-section">
+                <h2 class="section-title">FEATURES</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-title">FLATTERING ROUND NECKLINE</div>
+                        <div class="feature-description">The classic round neckline adds a timeless, elegant touch to this dress. It's versatile and pairs well with accessories, providing a sophisticated yet comfortable look for a variety of occasions.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">EYE-CATCHING PRINTED PATTERN</div>
+                        <div class="feature-description">The beautiful, vibrant printed design adds a bold, stylish touch to the dress, elevating its overall look and making it perfect for fashion-forward women.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">FLOWY DESIGN</div>
+                        <div class="feature-description">The flowy cut provides a flattering silhouette for all body types. It moves gracefully with every step, offering both elegance and freedom of movement, perfect for both casual and semi-formal wear.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">CHARMING LONG SLEEVES</div>
+                        <div class="feature-description">The long sleeves offer extra warmth and coverage, making this dress perfect for cooler weather. The relaxed fit ensures comfort while still providing a stylish, polished appearance throughout the day.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">VERSATILE FOR ANY OCCASION</div>
+                        <div class="feature-description">This dress is perfect for a variety of events, from casual outings to semi-formal gatherings. Pair it with heels for a night out or sandals for a relaxed daytime look.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specifications -->
+            <div class="specs-section">
+                <h2 class="section-title">SPECIFICATIONS</h2>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Material:</span>
+                        <span class="spec-value">Polyester Fiber</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Available Sizes:</span>
+                        <span class="spec-value">S-4XL</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Available Colors:</span>
+                        <span class="spec-value">Gray</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Package Included:</span>
+                        <span class="spec-value">1x Round Neck Long Sleeve Printed Flowy Dress</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="notes-section">
+                <div class="notes-title">IMPORTANT NOTES</div>
+                <ul class="notes-list">
+                    <li>Please allow 2-3cm error due to manual measurement. Please make sure you do not mind before purchasing.</li>
+                    <li>Color may not appear as exactly as in real life due to variations between the computer monitors.</li>
+                    <li>Free shipping on orders over $75</li>
+                    <li>30-day return policy for unworn items</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image gallery functionality
+        function changeImage(thumbnail, imageSrc) {
+            document.getElementById('mainImage').src = imageSrc;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            thumbnail.classList.add('active');
+        }
+
+        // Size selection
+        function selectSize(sizeElement) {
+            document.querySelectorAll('.size-option').forEach(size => {
+                size.classList.remove('selected');
+            });
+            sizeElement.classList.add('selected');
+        }
+
+        // Color selection
+        function selectColor(colorElement) {
+            document.querySelectorAll('.color-option').forEach(color => {
+                color.classList.remove('selected');
+            });
+            colorElement.classList.add('selected');
+        }
+
+        // Quantity controls
+        function changeQuantity(change) {
+            const quantityInput = document.getElementById('quantity');
+            let currentValue = parseInt(quantityInput.value);
+            let newValue = currentValue + change;
+            
+            if (newValue >= 1) {
+                quantityInput.value = newValue;
+            }
+        }
+
+        // Add to cart functionality
+        function addToCart() {
+            const selectedSize = document.querySelector('.size-option.selected').textContent;
+            const quantity = document.getElementById('quantity').value;
+            
+            // Update cart badge
+            const cartBadge = document.querySelector('.cart-badge');
+            const currentCount = parseInt(cartBadge.textContent);
+            cartBadge.textContent = currentCount + parseInt(quantity);
+            
+            // Show confirmation
+            alert(`Added ${quantity} item(s) in size ${selectedSize} to cart!`);
+        }
+
+        // Buy now functionality
+        function buyNow() {
+            const selectedSize = document.querySelector('.size-option.selected').textContent;
+            const quantity = document.getElementById('quantity').value;
+            alert(`Proceeding to checkout with ${quantity} item(s) in size ${selectedSize}`);
+        }
+
+        // Quantity input validation
+        document.getElementById('quantity').addEventListener('change', function() {
+            if (this.value < 1) {
+                this.value = 1;
+            }
+        });
+    </script>
+</body>
+</html>
